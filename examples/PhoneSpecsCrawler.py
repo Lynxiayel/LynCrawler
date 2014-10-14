@@ -75,11 +75,11 @@ if __name__ == '__main__':
 <td class="nfo">Up to ([\d]+?) h</td>''', re.DOTALL)
     crawler.addPageAnalyzeItem('stand-by', sbtPat)
     ###### stand-by time 2G
-    sbt2Pat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>.*?
+    sbt2Pat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>[.]?
 <td class="nfo">Up to ([\d]+?) h \(2G\).*?</td>''', re.DOTALL)
     crawler.addPageAnalyzeItem('stand-by-2g', sbt2Pat)
     ###### stand-by time 3G
-    sbt3Pat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>.*?
+    sbt3Pat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>[.]?
 <td class="nfo">.*?Up to ([\d]+?) h \(3G\)</td>''', re.DOTALL)
     crawler.addPageAnalyzeItem('stand-by-3g', sbt3Pat)
     ###### NFC
