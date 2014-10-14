@@ -71,7 +71,7 @@ if __name__ == '__main__':
 <td class="nfo">(.+?)</td>''', re.DOTALL)
     crawler.addPageAnalyzeItem('multitouch', mtPat)
     ###### stand-by time (not given 2g or 3g)
-    sbtPat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>.*?
+    sbtPat = re.compile(r'''<td class="ttl"><a href="glossary\.php3\?term=stand-by-time">Stand-by</a></td>[.]?
 <td class="nfo">Up to ([\d]+?) h</td>''', re.DOTALL)
     crawler.addPageAnalyzeItem('stand-by', sbtPat)
     ###### stand-by time 2G
