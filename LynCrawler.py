@@ -5,6 +5,7 @@ import pickle
 
 
 class LynCrawler:
+
     def __init__(self):
         self.ToCrawl = set([])
         self.Crawled = set([])
@@ -15,7 +16,8 @@ class LynCrawler:
 
     def initBrowser(self):
         self.browser = mechanize.Browser()
-        self.browser.set_handle_robots(False)  # important to bypass the website anti-robot defence
+        # important to bypass the website anti-robot defence
+        self.browser.set_handle_robots(False)
         self.browser.addheaders = [("User-Agent",
                                     "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11")]
 
@@ -37,7 +39,6 @@ class LynCrawler:
         else:
             result = []
             for i in self.PageSniffer.analyzeAll(pageContent).values():
-                print i
                 if i:
                     for p in i:
                         if p:
@@ -61,25 +62,22 @@ class LynCrawler:
             print "All done."
             return True
 
-
     def crawl(self, page):
         try:
             response = self.browser.open(page)
             pageContent = response.read()
             self.store(self.analyzePage(pageContent))
             self.Crawled.add(page)
+            print 'page crawled:', page
             self.sniffNewPage(pageContent)
         except Exception as e:
             print e.message
             print "something went wrong when crawling ", page
 
-
     def store(self, data):
-        print data
         with open('data.txt', 'a+') as f:
-            if data['chipset']:
-                f.write(str(data))
-                f.write("\n")
+            f.write(str(data))
+            f.write("\n")
 
     def generateNewPageURL(self, tmpURL):
         """Sometimes the new url sniffed from the page content are relative path, you can modify it here."""

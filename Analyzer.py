@@ -3,6 +3,7 @@ import re
 
 
 class Analyzer:
+
     def __init__(self):
         self.items = {}
 
@@ -33,5 +34,3 @@ class Analyzer:
 
     def getItemCount(self):
         return len(self.items)
-
-
