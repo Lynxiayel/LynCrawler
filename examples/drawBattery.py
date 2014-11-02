@@ -38,7 +38,7 @@ def excludeEmptyEntry(*args):
     idxToDel = []
     for i, v in enumerate(tups):
         for j in v:
-            if j == 0 or j == '' or j==None:
+            if j == 0 or j == '' or j == None:
                 idxToDel.append(i)
                 break
     idxToDel.sort(reverse=True)
@@ -86,12 +86,16 @@ if __name__ == '__main__':
     date, bat = excludeEmptyEntry(date, bat)
     date, bat = sortCorrelatedData(date, bat)
     print "number of devices in graph", len(date)
-    plt.scatter(date, bat, s=22, alpha=0.5)
-    plt.xlabel('Announced date of the device', fontsize='16')
-    plt.ylabel('Battery compacity (mAh)', fontsize='16')
+    plt.scatter(date, bat, s=32, alpha=0.5)
+    plt.xlabel('Announced date of the device', fontsize='26')
+    plt.xticks(fontsize='20')
+    plt.ylabel('Battery compacity (mAh)', fontsize='26')
+    plt.yticks(fontsize='20')
     ax = plt.gca()
     fmt = mpl.ticker.ScalarFormatter(useOffset=False)
     fmt.set_scientific(False)
+    ax.set_ylim([0, 4400])
+    ax.set_xlim([2001.9, 2015.1])
     ax.xaxis.set_major_formatter(fmt)
     a, b, c, d, e = np.polyfit(date, bat, 4)
     date = np.array(date)
@@ -113,18 +117,22 @@ if __name__ == '__main__':
     date3, sdb3 = excludeEmptyEntry(date3, sdb3)
     date3, sdb3 = sortCorrelatedData(date3, sdb3)
     print "number of devices in graph", len(date)
-    plt.scatter(date1, sdb, s=22, linewidth=1, color='g',marker='+',label='stand-by')
-    plt.scatter(date2, sdb2, s=22,color='b',marker='o',label='stand-by-2g')
-    plt.scatter(date3, sdb3, s=22,linewidth=1, color='k',marker='x',label='stand-by-3g')
-    plt.xlabel('Announced date of the device', fontsize='16')
-    plt.ylabel('Stand-by time (h)', fontsize='16')
+    plt.scatter(
+        date1, sdb, s=32, linewidth=1, color='g', marker='+', label='stand-by')
+    plt.scatter(date2, sdb2, s=32, color='b', marker='o', label='stand-by-2g')
+    plt.scatter(date3, sdb3, s=32, linewidth=1, color='k',
+                marker='x', label='stand-by-3g')
+    plt.xlabel('Announced date of the device', fontsize='26')
+    plt.xticks(fontsize='20')
+    plt.ylabel('Stand-by time (h)', fontsize='26')
+    plt.yticks(fontsize='20')
     ax = plt.gca()
     fmt = mpl.ticker.ScalarFormatter(useOffset=False)
     fmt.set_scientific(False)
     ax.xaxis.set_major_formatter(fmt)
-    ax.set_ylim([0,1500])
-    ax.set_xlim([2001,2015.1])
-    ax.legend()
+    ax.set_ylim([0, 1500])
+    ax.set_xlim([2001.9, 2015.1])
+    ax.legend(fontsize=20,loc='upper left')
     a, b, c, d, e = np.polyfit(date1, sdb, 4)
     a2, b2, c2, d2, e2 = np.polyfit(date2, sdb2, 4)
     a3, b3, c3, d3, e3 = np.polyfit(date3, sdb3, 4)
@@ -134,9 +142,9 @@ if __name__ == '__main__':
     plt.plot(date1, a * date1 ** 4 + b * date1 **
              3 + c * date1 ** 2 + d * date1 + e, color='g')
     plt.plot(date2, a2 * date2 ** 4 + b2 * date2 **
-             3 + c2 * date2** 2 + d2 * date2+ e2, color='b')
-    plt.plot(date3, a3 * date3** 4 + b3 * date3 **
-             3 + c3 * date3 ** 2 + d3 * date3+ e3, color='k')
+             3 + c2 * date2 ** 2 + d2 * date2 + e2, color='b')
+    plt.plot(date3, a3 * date3 ** 4 + b3 * date3 **
+             3 + c3 * date3 ** 2 + d3 * date3 + e3, color='k')
     fig = plt.gcf()
     fig.set_size_inches(12, 8)
     fig.savefig('date-sdb', dpi=300)
