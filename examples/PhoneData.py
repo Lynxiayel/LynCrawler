@@ -151,6 +151,8 @@ class PhoneData:
 
     def getCount(self):
         return len(self.data)
+    def getBrandCount(self):
+        return len(set(self.getBrand()))
 
 if __name__ == '__main__':
     data = PhoneData()
@@ -164,3 +166,5 @@ if __name__ == '__main__':
     sdb3 = data.getStandBy3G()
     #print zip(name, sdb, sdb2, sdb3)
     print data.getCount()
+    print data.getBrandCount()
+    print set(brand)
