@@ -1,8 +1,5 @@
 import os
 import numpy as np
-from numpy.random import randn
-import pandas as pd
-from scipy import stats
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -39,7 +36,7 @@ def excludeEmptyEntry(*args):
     idxToDel = []
     for i, v in enumerate(tups):
         for j in v:
-            if j == 0 or j == '' or j == None:
+            if j == 0 or j == '' or j is None:
                 idxToDel.append(i)
                 break
     idxToDel.sort(reverse=True)
@@ -168,7 +165,7 @@ if __name__ == '__main__':
     fig.savefig('date-sdb', dpi=300)
     plt.close()
 
-    # save average bat
+    # save average bat and sdb
     saveAvg(date, bat, 'avgBattery.txt')
     saveAvg(date1, sdb, 'avgSdb.txt')
     saveAvg(date2, sdb2, 'avgSdb2.txt')
