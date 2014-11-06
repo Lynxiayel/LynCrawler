@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from numpy.random import randn
 import pandas as pd
@@ -72,10 +73,13 @@ def saveAvg(date, value, filename):
         else:
             avg[d] = [b]
     keys = sorted(avg)
-    with open(filename, 'w') as f:
+    if os.path.isfile(filename):
+        os.remove(filename)
+
+    with open(filename, 'a') as f:
         for k in keys:
             v = sum(avg[k]) / len(avg[k])
-            f.write(str(k) + ', ' + str(v))
+            f.write(str(k) + ', ' + str(v) + '\n')
 
 
 if __name__ == '__main__':
