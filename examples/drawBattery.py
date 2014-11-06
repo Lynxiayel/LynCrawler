@@ -64,6 +64,20 @@ def extractByBrand(index, brand, *args):
     return zip(*result)
 
 
+def saveAvg(date, value, filename):
+    avg = {}
+    for d, b in zip(date, value):
+        if d in avg.keys():
+            avg[d].append(b)
+        else:
+            avg[d] = [b]
+    keys = sorted(avg)
+    with open(filename, 'w') as f:
+        for k in keys:
+            v = sum(avg[k]) / len(avg[k])
+            f.write(str(k) + ', ' + str(v))
+
+
 if __name__ == '__main__':
     data = PhoneData()
     date = data.getDate()
@@ -95,12 +109,12 @@ if __name__ == '__main__':
     fmt = mpl.ticker.ScalarFormatter(useOffset=False)
     fmt.set_scientific(False)
     ax.set_ylim([0, 4400])
-    ax.set_xlim([2001.8, 2015.2])
+    ax.set_xlim([1996.5, 2015.3])
     ax.xaxis.set_major_formatter(fmt)
     a, b, c, d, e = np.polyfit(date, bat, 4)
-    date = np.array(date)
-    plt.plot(date, a * date ** 4 + b * date **
-             3 + c * date ** 2 + d * date + e, color='r', linewidth='2')
+    plotdate = np.array(date)
+    plt.plot(plotdate, a * plotdate ** 4 + b * plotdate **
+             3 + c * plotdate ** 2 + d * plotdate + e, color='r')
     fig = plt.gcf()
     fig.set_size_inches(12, 8)
     fig.savefig('date-battery', dpi=300)
@@ -131,21 +145,27 @@ if __name__ == '__main__':
     fmt.set_scientific(False)
     ax.xaxis.set_major_formatter(fmt)
     ax.set_ylim([0, 1500])
-    ax.set_xlim([2001.8, 2015.2])
+    ax.set_xlim([1996.5, 2015.3])
     ax.legend(fontsize=20, loc='upper left')
     a, b, c, d, e = np.polyfit(date1, sdb, 4)
     a2, b2, c2, d2, e2 = np.polyfit(date2, sdb2, 4)
     a3, b3, c3, d3, e3 = np.polyfit(date3, sdb3, 4)
-    date1 = np.array(date1)
-    date2 = np.array(date2)
-    date3 = np.array(date3)
-    plt.plot(date1, a * date1 ** 4 + b * date1 **
-             3 + c * date1 ** 2 + d * date1 + e, color='g', linewidth='2')
-    plt.plot(date2, a2 * date2 ** 4 + b2 * date2 **
-             3 + c2 * date2 ** 2 + d2 * date2 + e2, color='b', linewidth='2')
-    plt.plot(date3, a3 * date3 ** 4 + b3 * date3 **
-             3 + c3 * date3 ** 2 + d3 * date3 + e3, color='k', linewidth='2')
+    plotdate1 = np.array(date1)
+    plotdate2 = np.array(date2)
+    plotdate3 = np.array(date3)
+    plt.plot(plotdate1, a * plotdate1 ** 4 + b * plotdate1 **
+             3 + c * plotdate1 ** 2 + d * plotdate1 + e, color='g')
+    plt.plot(plotdate2, a2 * plotdate2 ** 4 + b2 * plotdate2 **
+             3 + c2 * plotdate2 ** 2 + d2 * plotdate2 + e2, color='b')
+    plt.plot(plotdate3, a3 * plotdate3 ** 4 + b3 * plotdate3 **
+             3 + c3 * plotdate3 ** 2 + d3 * plotdate3 + e3, color='k')
     fig = plt.gcf()
     fig.set_size_inches(12, 8)
     fig.savefig('date-sdb', dpi=300)
     plt.close()
+
+    # save average bat
+    saveAvg(date, bat, 'avgBattery.txt')
+    saveAvg(date1, sdb, 'avgSdb.txt')
+    saveAvg(date2, sdb2, 'avgSdb2.txt')
+    saveAvg(date3, sdb3, 'avgSdb3.txt')
