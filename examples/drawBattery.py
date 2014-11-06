@@ -95,12 +95,12 @@ if __name__ == '__main__':
     fmt = mpl.ticker.ScalarFormatter(useOffset=False)
     fmt.set_scientific(False)
     ax.set_ylim([0, 4400])
-    ax.set_xlim([2001.9, 2015.1])
+    ax.set_xlim([2001.8, 2015.2])
     ax.xaxis.set_major_formatter(fmt)
     a, b, c, d, e = np.polyfit(date, bat, 4)
     date = np.array(date)
     plt.plot(date, a * date ** 4 + b * date **
-             3 + c * date ** 2 + d * date + e, color='g')
+             3 + c * date ** 2 + d * date + e, color='r', linewidth='2')
     fig = plt.gcf()
     fig.set_size_inches(12, 8)
     fig.savefig('date-battery', dpi=300)
@@ -118,9 +118,9 @@ if __name__ == '__main__':
     date3, sdb3 = sortCorrelatedData(date3, sdb3)
     print "number of devices in graph", len(date)
     plt.scatter(
-        date1, sdb, s=32, linewidth=1, color='g', marker='+', label='stand-by')
+        date1, sdb, s=36, linewidth=2, color='g', marker='+', label='stand-by')
     plt.scatter(date2, sdb2, s=32, color='b', marker='o', label='stand-by-2g')
-    plt.scatter(date3, sdb3, s=32, linewidth=1, color='k',
+    plt.scatter(date3, sdb3, s=36, linewidth=2, color='k',
                 marker='x', label='stand-by-3g')
     plt.xlabel('Announced date of the device', fontsize='26')
     plt.xticks(fontsize='20')
@@ -131,8 +131,8 @@ if __name__ == '__main__':
     fmt.set_scientific(False)
     ax.xaxis.set_major_formatter(fmt)
     ax.set_ylim([0, 1500])
-    ax.set_xlim([2001.9, 2015.1])
-    ax.legend(fontsize=20,loc='upper left')
+    ax.set_xlim([2001.8, 2015.2])
+    ax.legend(fontsize=20, loc='upper left')
     a, b, c, d, e = np.polyfit(date1, sdb, 4)
     a2, b2, c2, d2, e2 = np.polyfit(date2, sdb2, 4)
     a3, b3, c3, d3, e3 = np.polyfit(date3, sdb3, 4)
@@ -140,11 +140,11 @@ if __name__ == '__main__':
     date2 = np.array(date2)
     date3 = np.array(date3)
     plt.plot(date1, a * date1 ** 4 + b * date1 **
-             3 + c * date1 ** 2 + d * date1 + e, color='g')
+             3 + c * date1 ** 2 + d * date1 + e, color='g', linewidth='2')
     plt.plot(date2, a2 * date2 ** 4 + b2 * date2 **
-             3 + c2 * date2 ** 2 + d2 * date2 + e2, color='b')
+             3 + c2 * date2 ** 2 + d2 * date2 + e2, color='b', linewidth='2')
     plt.plot(date3, a3 * date3 ** 4 + b3 * date3 **
-             3 + c3 * date3 ** 2 + d3 * date3 + e3, color='k')
+             3 + c3 * date3 ** 2 + d3 * date3 + e3, color='k', linewidth='2')
     fig = plt.gcf()
     fig.set_size_inches(12, 8)
     fig.savefig('date-sdb', dpi=300)
