@@ -137,7 +137,7 @@ if __name__ == '__main__':
     plt.scatter(date2, sdb2, s=32, color='b', marker='o', label='stand-by-2g')
     plt.scatter(date3, sdb3, s=36, linewidth=2, color='k',
                 marker='x', label='stand-by-3g')
-    plt.xlabel('Announced date of the device', fontsize='26')
+    plt.xlabel('Released date of the device', fontsize='26')
     plt.xticks(fontsize='20')
     plt.ylabel('Stand-by time (h)', fontsize='26')
     plt.yticks(fontsize='20')
