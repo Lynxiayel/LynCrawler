@@ -65,6 +65,7 @@ def extractByBrand(index, brand, *args):
 def saveAvg(date, value, filename):
     avg = {}
     for d, b in zip(date, value):
+        d = int(d)  # if do not want the year-wise average, comment this line
         if d in avg.keys():
             avg[d].append(b)
         else:
@@ -131,12 +132,13 @@ if __name__ == '__main__':
     date3, sdb3, size = excludeTablet(2, 6.9, date, sdb3, size)
     date3, sdb3 = excludeEmptyEntry(date3, sdb3)
     date3, sdb3 = sortCorrelatedData(date3, sdb3)
-    #print "number of devices in graph", len(date)
+    # print "number of devices in graph", len(date)
     plt.scatter(
-        date1, sdb, s=40, linewidth=2, color='g', marker='+', label='stand-by')
-    plt.scatter(date2, sdb2, s=34, color='b', marker='o', label='stand-by-2g')
-    plt.scatter(date3, sdb3, s=38, linewidth=2, color='k',
-                marker='x', label='stand-by-3g')
+        date1, sdb, s=36, linewidth=2, color='g', marker='+', label='stand-by', alpha=0.5)
+    plt.scatter(date2, sdb2, s=32, color='b', marker='o',
+                label='stand-by-2g', alpha=0.5)
+    plt.scatter(date3, sdb3, s=36, linewidth=2, color='k',
+                marker='x', label='stand-by-3g', alpha=0.5)
     plt.xlabel('Released date of the device', fontsize='26')
     plt.xticks(fontsize='20')
     plt.ylabel('Stand-by time (h)', fontsize='26')
