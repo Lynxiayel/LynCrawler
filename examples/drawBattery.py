@@ -101,7 +101,7 @@ if __name__ == '__main__':
     date, bat = excludeEmptyEntry(date, bat)
     date, bat = sortCorrelatedData(date, bat)
     #print "number of devices in graph", len(date)
-    plt.scatter(date, bat, s=32, alpha=0.5)
+    plt.scatter(date, bat, s=34, alpha=0.5)
     plt.xlabel('Released date of the device', fontsize='26')
     plt.xticks(fontsize='20')
     plt.ylabel('Battery compacity (mAh)', fontsize='26')
@@ -133,9 +133,9 @@ if __name__ == '__main__':
     date3, sdb3 = sortCorrelatedData(date3, sdb3)
     #print "number of devices in graph", len(date)
     plt.scatter(
-        date1, sdb, s=36, linewidth=2, color='g', marker='+', label='stand-by')
-    plt.scatter(date2, sdb2, s=32, color='b', marker='o', label='stand-by-2g')
-    plt.scatter(date3, sdb3, s=36, linewidth=2, color='k',
+        date1, sdb, s=40, linewidth=2, color='g', marker='+', label='stand-by')
+    plt.scatter(date2, sdb2, s=34, color='b', marker='o', label='stand-by-2g')
+    plt.scatter(date3, sdb3, s=38, linewidth=2, color='k',
                 marker='x', label='stand-by-3g')
     plt.xlabel('Released date of the device', fontsize='26')
     plt.xticks(fontsize='20')
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     fmt = mpl.ticker.ScalarFormatter(useOffset=False)
     fmt.set_scientific(False)
     ax.xaxis.set_major_formatter(fmt)
-    ax.set_ylim([0, 1500])
+    ax.set_ylim([0, 1550])
     ax.set_xlim([1996.5, 2015.3])
     ax.legend(fontsize=20, loc='upper left')
     a, b, c, d, e = np.polyfit(date1, sdb, 4)
