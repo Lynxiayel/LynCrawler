@@ -1,7 +1,6 @@
 __author__ = 'lynxiayel'
 from Analyzer import Analyzer
 import mechanize
-import pickle
 
 
 class LynCrawler:
@@ -79,9 +78,10 @@ class LynCrawler:
             f.write(str(data))
             f.write("\n")
 
-    def generateNewPageURL(self, tmpURL):
+    def generateNewPageURL(self, tmpURL, parentPath=""):
         """Sometimes the new url sniffed from the page content are relative path, you can modify it here."""
-        parPath = r"http://www.gsmarena.com/"
+        if not parentPath:
+            parPath = r"http://www.gsmarena.com/"
         if "http://" in tmpURL:
             return tmpURL
         else:
